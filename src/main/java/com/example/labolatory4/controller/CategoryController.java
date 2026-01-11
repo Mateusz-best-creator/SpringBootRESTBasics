@@ -22,12 +22,18 @@ public class CategoryController {
     }
 
     @PostMapping
-    public String addCategory(@RequestBody Category cat) {
+    public Category addCategory(@RequestBody Category cat) {
         return this.categoryService.addCategory(cat);
     }
 
     @DeleteMapping("/{category_id}")
-    public String removeCategory(@PathVariable Integer category_id) {
-        return this.categoryService.deleteCategory(category_id);
+    public void deleteCategory(@PathVariable Integer category_id) {
+        this.categoryService.deleteCategory(category_id);
+    }
+
+    @PutMapping("/{id}")
+    public Category updateCategory(@PathVariable Integer id,
+                                 @RequestBody Category category) {
+        return this.categoryService.updateCategory(id, category);
     }
 }

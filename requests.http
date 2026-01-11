@@ -42,3 +42,24 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/api/categories/1
+
+###
+PUT http://localhost:8080/api/categories/1
+Content-Type: application/json
+
+{
+  "name": "TastyFruits",
+  "title": "A2"
+}
+
+###
+PUT http://localhost:8080/api/elements/1
+Content-Type: application/json
+
+{
+    "name": "Orange",
+    "price": 75
+}
+
+###
+DELETE http://localhost:8080/api/elements/1

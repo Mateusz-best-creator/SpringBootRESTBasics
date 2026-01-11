@@ -21,9 +21,20 @@ public class ElementController {
     }
 
     @PostMapping("api/categories/{category_id}/elements")
-    public String addElement(@PathVariable Integer category_id,
+    public Element addElement(@PathVariable Integer category_id,
                              @RequestBody Element element) {
         return elementService.addElement(category_id, element);
+    }
+
+    @PutMapping("api/elements/{id}")
+    public Element updateElement(@PathVariable Integer id,
+                                @RequestBody Element element) {
+        return elementService.updateElement(id, element);
+    }
+
+    @DeleteMapping("api/elements/{id}")
+    public void deleteElement(@PathVariable Integer id) {
+        elementService.deleteElement(id);
     }
 
 }

@@ -36,7 +36,7 @@ public class Element {
     public void setName(String name) {
         this.name = name;
     }
-    public void setField(Integer price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
     public void setCategory(Category cat) { this.category = cat; }

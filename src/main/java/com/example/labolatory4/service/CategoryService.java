@@ -14,29 +14,40 @@ public class CategoryService {
 
     CategoryService(CategoryRepository repo) {
         this.repository = repo;
+        this.repository.deleteAll();
     }
 
     public ArrayList<Category> getAllCategories() {
         return (ArrayList<Category>) this.repository.findAll();
     }
 
-    public String addCategory(Category cat) {
+    public Category addCategory(Category cat) {
         List<Category> categories = this.repository.findAll();
         for (Category category : categories) {
             if (category.getName().equals(cat.getName())) {
-                return "Cannot add category with name: " +
-                        category.getName() + ", it already exists";
+                throw new IllegalStateException("Cannot add category with name: " +
+                        category.getName() + ", it already exists");
             }
         }
-        this.repository.save(cat);
-        return "Category: " + cat.getName() + " added successfully.";
+        return this.repository.save(cat);
     }
 
-    public String deleteCategory(Integer category_id) {
+    public void deleteCategory(Integer category_id) {
         if (repository.existsById(category_id)) {
             repository.deleteById(category_id);
-            return "Removed category with ID: " + category_id;
+            return;
         }
-        return "Category with given ID: + " + category_id + " does not exist";
+        throw new IllegalStateException("Category with given ID: + " + category_id + " does not exist");
+    }
+
+    public Category updateCategory(Integer category_id, Category new_category) {
+        Category cat = repository.findById(category_id)
+                .orElseThrow(
+                        () -> new IllegalStateException("Category with given ID: " +
+                                category_id + " does not exist")
+                );
+        cat.setName(new_category.getName());
+        cat.setTitle(new_category.getTitle());
+        return repository.save(cat);
     }
 }

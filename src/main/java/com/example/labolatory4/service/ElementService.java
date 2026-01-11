@@ -7,7 +7,6 @@ import com.example.labolatory4.repository.ElementRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 @Service
 public class ElementService {
@@ -18,20 +17,38 @@ public class ElementService {
     ElementService(ElementRepository repo_e, CategoryRepository repo_c) {
         this.elementRepository = repo_e;
         this.categoryRepository = repo_c;
+        this.categoryRepository.deleteAll();
+        this.elementRepository.deleteAll();
     }
 
     public ArrayList<Element> getAllElements() {
         return (ArrayList<Element>) this.elementRepository.findAll();
     }
 
-    public String addElement(Integer categoryId, Element element) {
+    public Element addElement(Integer categoryId, Element element) {
         Category target_category = categoryRepository.findById(categoryId)
                 .orElseThrow(
                         () -> new IllegalStateException("given ID: " + categoryId + " does not exist")
                 );
-        System.out.println("Category: " + target_category);
         element.setCategory(target_category);
-        elementRepository.save(element);
-        return "Element successfully added to category: " + target_category;
+        return elementRepository.save(element);
+    }
+
+    public Element updateElement(Integer elementId, Element newElement) {
+        Element element = elementRepository.findById(elementId).orElseThrow(
+                () -> new IllegalStateException(
+                        "element with such ID: " + elementId + " does not exist."
+                )
+        );
+        element.setName(newElement.getName());
+        element.setPrice(newElement.getPrice());
+        return elementRepository.save(element);
+    }
+
+    public void deleteElement(Integer elementId) {
+        if (!elementRepository.existsById(elementId)) {
+            throw new IllegalStateException("Element with given ID: " + elementId + " does not exist.");
+        }
+        elementRepository.deleteById(elementId);
     }
 }
