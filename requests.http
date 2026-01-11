@@ -1,0 +1,44 @@
+###
+GET http://localhost:8080/api/categories
+
+###
+GET http://localhost:8080/api/elements
+
+###
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+
+{
+  "name": "Fruits",
+  "title": "A1"
+}
+
+###
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+
+{
+  "name": "Vegetables",
+  "title": "A3"
+}
+
+###
+POST http://localhost:8080/api/categories/1/elements
+Content-Type: application/json
+
+{
+    "name": "orange",
+    "price": 100
+}
+
+###
+POST http://localhost:8080/api/categories/1/elements
+Content-Type: application/json
+
+{
+    "name": "apple",
+    "price": 50
+}
+
+###
+DELETE http://localhost:8080/api/categories/1
