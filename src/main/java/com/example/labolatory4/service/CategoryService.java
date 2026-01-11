@@ -17,6 +17,12 @@ public class CategoryService {
         this.repository.deleteAll();
     }
 
+    public Category getById(Integer id) {
+        return this.repository.findById(id).orElseThrow(
+                () -> new IllegalStateException("Category with given ID: " + id + " does not exist")
+        );
+    }
+
     public ArrayList<Category> getAllCategories() {
         return (ArrayList<Category>) this.repository.findAll();
     }

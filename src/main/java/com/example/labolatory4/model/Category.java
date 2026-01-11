@@ -18,6 +18,8 @@ public class Category {
     private String name;
     @Column(name="title")
     private String title;
+    @Column(name="password")
+    private String password;
 
     @OneToMany(
             mappedBy = "category",
@@ -32,10 +34,11 @@ public class Category {
 
     }
 
-    public Category(Integer id, String name, String title) {
+    public Category(Integer id, String name, String title, String password) {
         this.id = id;
         this.name = name;
         this.title = title;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -50,6 +53,8 @@ public class Category {
         return this.title;
     }
 
+    public String getPassword() {return this.password;}
+
     public List<Element> getElements() { return elements; }
 
     public void setId(Integer id) {
@@ -63,6 +68,8 @@ public class Category {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setPassword(String password) {this.password = password;}
 
     @Override
     public boolean equals(Object o) {

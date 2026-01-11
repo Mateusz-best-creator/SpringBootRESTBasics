@@ -10,7 +10,8 @@ Content-Type: application/json
 
 {
   "name": "Fruits",
-  "title": "A1"
+  "title": "A1",
+  "password": "123"
 }
 
 ###
@@ -19,7 +20,8 @@ Content-Type: application/json
 
 {
   "name": "Vegetables",
-  "title": "A3"
+  "title": "A3",
+  "password": "456"
 }
 
 ###
